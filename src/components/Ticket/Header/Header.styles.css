@@ -1,0 +1,20 @@
+.headerWrapper {
+    display: flex;
+    flex-direction: row;
+    margin: 20px 10px 10px 10px;
+}
+.price {
+    flex: 1;
+    margin: 6px 10px 10px 10px;
+    font-size: 24px;
+    line-height: 24px;
+    color: #2196F3;
+}
+.headerWrapper span {
+    flex: 1;
+}
+.logo {
+    flex: 1;
+    height: 100%;
+    /* width: 36px; */
+}
