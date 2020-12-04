@@ -2,7 +2,7 @@
 
 * {
     box-sizing: border-box;
-    text-transform: uppercase;    
+    text-transform: uppercase;
 }
 
 .unselectable {
@@ -36,7 +36,8 @@
     letter-spacing: 0.5px;
     width: 960px;
     height: 1350px;
-    background: #F3F7FA
+    background: #F3F7FA;
+    margin: auto;
 }
 
 .app-wrapper {
