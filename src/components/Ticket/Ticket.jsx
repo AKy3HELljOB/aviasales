@@ -1,19 +1,19 @@
 import React from 'react';
-import s7logo from '../../assets/s7logo.svg';
+import PropTypes from 'prop-types'
 import Header from './Header/Header' 
 import Segment from './Segment/Segment' 
 import './Ticket.styles.css';
 
 const Ticket = (props) => (
   <div className="ticket">
-    <Header price="13400" logo={s7logo}/>
-    <Segment origin="MOW" destination="HKT" date="11:45" duration="35ч 10м" stops={["HKG", "JNB"]}/>
-    <Segment origin="HKT" destination="HKT" date="18:45" duration="10ч 45м"/>
+    <Header {...props}/>
+    <Segment {...props.segments[0]}/>
+    <Segment {...props.segments[1]}/>
   </div>
-);
+)
 
  Ticket.propTypes = {
-   // bla: PropTypes.string,
+   segments: PropTypes.arrayOf(PropTypes.object)
  };
 
  Ticket.defaultProps = {

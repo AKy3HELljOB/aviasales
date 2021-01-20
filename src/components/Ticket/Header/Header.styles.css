@@ -12,9 +12,8 @@
 }
 .headerWrapper span {
     flex: 1;
+    margin: 0px 10px 0px 10px;
 }
 .logo {
-    flex: 1;
-    height: 100%;
-    /* width: 36px; */
+    margin: auto auto auto 0;  
 }

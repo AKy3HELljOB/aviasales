@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Segment.styles.css';
 
+
 const StopsCountString = (count) => {
   switch (count) {
     case 0:
@@ -17,6 +18,23 @@ const StopsCountString = (count) => {
   }
 }
 
+const formatNumber = (number) => ((number < 10 ? "0" : "") + number);
+const formatTime = (date) => {
+  return date.toLocaleString("ru-RU", { timezone: 'UTC', hour: 'numeric', minute: 'numeric'});
+}
+
+const HOUR_TO_MIN = 60;
+const formatDuration = (duration) => (formatNumber(~~(duration / HOUR_TO_MIN) + "ч " + formatNumber(duration % HOUR_TO_MIN) + "м"));
+
+const calcTime = (date, duration) => {
+  const MIN_TO_MSEC = 60000;
+  const msecStart = Date.parse(date);
+  const startDate = new Date(msecStart);
+  const finishDate = new Date(msecStart + duration * MIN_TO_MSEC);
+  
+  return formatTime(startDate) + " - " + formatTime(finishDate);
+}
+
 const InfoBlock = (props) => (
   <div className="infoBlockWrapper">
     <div className="row1" >{props.label}</div>
@@ -29,13 +47,13 @@ const Info = (props) => (
     <div  className="column" >
       <InfoBlock
         label={props.origin + " - " + props.destination}
-        data={props.date + "-" + props.date}
+        data={calcTime(props.date, props.duration)}
       />
     </div>
     <div  className="column" >
       <InfoBlock className="column" 
         label="В пути"
-        data={props.duration}
+        data={formatDuration(props.duration)}
       />
     </div>
     <div  className="column" >
@@ -48,6 +66,10 @@ const Info = (props) => (
 );
 
 Info.propTypes = {
+  origin: PropTypes.string,
+  destination: PropTypes.string,
+  date: PropTypes.string,
+  duration: PropTypes.number,
   stops: PropTypes.array
 };
 
