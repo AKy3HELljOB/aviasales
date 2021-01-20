@@ -1,5 +1,3 @@
-//import {isOk, handleError} from '../../index'
-
 export function isOk(request) {
   return request.status === 200;
 }
@@ -14,7 +12,7 @@ export async function getRequestId(callback, errorCallback) {
       res.json()
         .then(res => callback(res) , e => handleError(e, "getRequestId: ", errorCallback));
     }
-  } catch(e) { return handleError(e, "getRequestId: ", errorCallback) };
+  } catch(e) { handleError(e, "getRequestId: ", errorCallback) };
 }
 
 export async function getTickets(searchId, callback, errorCallback) {
@@ -23,9 +21,9 @@ export async function getTickets(searchId, callback, errorCallback) {
       const res = await fetch(`https://front-test.beta.aviasales.ru/tickets?searchId=${searchId}`)    
       if (isOk(res)) {
         res.json()
-          .then(res => callback(res), e => handleError(e, "getTickets ", errorCallback))
+          .then(res => callback(res), e => handleError(e, "getTickets: ", errorCallback))
       }    
-    } catch(e) { return handleError(e, "getTickets ", errorCallback) }; 
+    } catch(e) { handleError(e, "getTickets: ", errorCallback) }; 
   }
 }
 
