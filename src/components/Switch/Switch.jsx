@@ -1,16 +1,37 @@
-import React from 'react';
-import './Switch.styles.css';
+import React, { useContext } from "react";
+import { OrderContext, CHEAPEST, FASTEST } from "../../reducers/orderReducer";
+import "./Switch.styles.css";
 
-const Switch = (props) => (
-  <div className="switch">
-    <div>
-    <input type="radio" id="cheapest" name="order" checked={true} className="input visually-hidden" />
-    <label for="cheapest" className="button left">Самый дешевый</label>
-    
-    <input type="radio" id="fastest" name="order" className="input visually-hidden" />
-    <label for="fastest" className="button right">Самый быстрый</label>
+const Switch = () => {
+  const { orderState, dispatchOrder } = useContext(OrderContext);
+
+  const values = [
+    { key: CHEAPEST, style: "button left", text: "Самый дешевый" },
+    { key: FASTEST, style: "button right", text: "Самый быстрый" }
+  ];
+
+  const makeButton = ({ key, style, text }) => (
+    <span key={key}>
+      <input
+        type="radio"
+        id={key}
+        name="order"
+        checked={orderState.selected === key}
+        className="input visually-hidden"
+        onChange={(e) => { dispatchOrder({ type: e.target.id})}}
+      />
+      <label htmlFor={key} className={style}>
+        {text}
+      </label>
+    </span>
+  );
+
+  return (
+    <div className="switch">
+      <div>
+        {values.map(makeButton)}
+      </div>
     </div>
-  </div>
-);
-
+  );
+};
 export default Switch;
